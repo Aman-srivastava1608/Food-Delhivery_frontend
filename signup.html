@@ -29,35 +29,27 @@
 </section>
 
 <footer>© 2025 Food Delivery</footer>
+
 <script>
     function registerUser() {
-       const full_name = document.getElementById('signup-name').value;
-       const email = document.getElementById('signup-email').value;
-       const phone = document.getElementById('signup-phone').value;
-       const address = document.getElementById('signup-address').value;
-       const password = document.getElementById('signup-password').value;
-       const confirm_password = document.getElementById('signup-confirm-password').value;
- 
-       fetch('https://food-delivery-backend-7azh.onrender.com/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ full_name, email, phone, address, password, confirm_password })
-       })
-       .then(res => res.text())
-       .then(msg => alert(msg))
-       .catch(err => alert("Error: " + err));
-       return false;
+        const full_name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const phone = document.getElementById('signup-phone').value;
+        const address = document.getElementById('signup-address').value;
+        const password = document.getElementById('signup-password').value;
+        const confirm_password = document.getElementById('signup-confirm-password').value;
+
+        fetch('https://food-delivery-backend-7azh.onrender.com/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ full_name, email, phone, address, password, confirm_password })
+        })
+        .then(res => res.text())
+        .then(msg => alert(msg))
+        .catch(err => alert("Error: " + err));
+        return false;
     }
- </script>
- 
-  .then(res => res.text())
-  .then(msg => alert(msg))
-  .catch(err => alert("Error: " + err));
-  return false;
-}
-
 </script>
-
 
 </body>
 </html>
