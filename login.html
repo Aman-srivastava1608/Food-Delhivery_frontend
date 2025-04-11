@@ -19,11 +19,12 @@
 
 <section class="auth-container">
     <h2>Login</h2>
-    <form onsubmit="return loginUser()">
+    <form onsubmit="loginUser(event)">
         <input type="email" id="login-email" placeholder="Email" required>
         <input type="password" id="login-password" placeholder="Password" required>
         <button type="submit">Login</button>
     </form>
+    
     <p><a href="forgot-password.html">Forgot Password?</a></p>
     <p><a href="Admin_pnnel/login.html">Admin login</a></p>
 </section>
@@ -32,33 +33,30 @@
 <footer>© 2025 Food Delivery</footer>
 
 <script>
-    function loginUser() {
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-    
-        fetch('https://food-delivery-backend-7azh.onrender.com/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password })
-        })
-        .then(res => res.text())
-        .then(data => {
-            if (data === 'Login successful') {
-                alert(data);
-                window.location.href = 'index.html';
-            } else {
-                alert(data);
-            }
-        })
-        .catch(err => {
-            console.error('Error:', err);
-            alert('Login failed.');
-        });
-    
-        return false;
-    }
+    function loginUser(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    fetch('https://food-delivery-backend-7azh.onrender.com/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Invalid credentials");
+        return res.json();
+    })
+    .then(data => {
+        alert(data.message); // Show login success message
+        window.location.href = 'index.html'; // ✅ Redirect to homepage
+    })
+    .catch(err => {
+        alert("Login failed: " + err.message);
+    });
+}
+
     </script>
     
 </body>
