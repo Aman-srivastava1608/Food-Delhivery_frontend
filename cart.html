@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cart - Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="cart.js" defer></script>
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<section>
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <h3>Total: ₹<span id="cart-total">0</span></h3>
+    <label for="promo Code ">Promo code :</label>
+    <input type="text" id="promocode " required><br>
+    <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+
+</section>
+
+
+<footer>© 2025 Food Delivery</footer>
+
+</body>
+</html>

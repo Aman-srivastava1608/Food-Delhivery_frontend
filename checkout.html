@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Checkout - Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<section id="checkout-form">
+    <h2>Delivery Address</h2>
+    <form id="delivery-form">
+        <label>Full Name:</label>
+        <input type="text" id="full-name" required>
+        
+        <label>Phone Number:</label>
+        <input type="tel" id="phone-number" required>
+        
+        <label>Address:</label>
+        <textarea id="address" required></textarea>
+        
+        <label>City:</label>
+        <input type="text" id="city" required>
+        
+        <label>Pincode:</label>
+        <input type="text" id="pincode" required>
+
+        <h3>Select Payment Method</h3>
+        <label><input type="radio" name="payment" value="cod" checked> Cash on Delivery</label><br>
+        <label><input type="radio" name="payment" value="card"> Credit/Debit Card</label><br>
+        <label><input type="radio" name="payment" value="upi"> UPI</label><br>
+        
+        <button type="button" onclick="submitOrder()">Place Order</button>
+    </form>
+</section>
+
+<footer>© 2025 Food Delivery</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

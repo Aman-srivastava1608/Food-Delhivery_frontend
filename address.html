@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Delivery Address - Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function saveAddress() {
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!name || !address || !phone) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const deliveryInfo = { name, address, phone };
+            localStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+            window.location.href = 'payment.html';
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+</header>
+
+<section>
+    <h2>Delivery Address</h2>
+    <form onsubmit="event.preventDefault(); saveAddress();">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" required></textarea><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" required><br>
+
+        
+
+        <button type="submit">Continue to Payment</button>
+    </form>
+</section>
+
+<footer>© 2025 Food Delivery</footer>
+
+</body>
+</html>

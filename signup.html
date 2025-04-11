@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Food Delivery - Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+    </nav>
+</header>
+
+<section class="auth-container">
+    <h2>Create Your Account</h2>
+    <form onsubmit="return registerUser()">
+        <input type="text" id="signup-name" placeholder="Full Name" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="text" id="signup-phone" placeholder="Phone Number" required>
+        <input type="text" id="signup-address" placeholder="Full Address" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+        <button type="submit">Signup</button>
+    </form>
+</section>
+
+<footer>© 2025 Food Delivery</footer>
+<script>
+   function registerUser() {
+  const full_name = document.getElementById('signup-name').value;
+  const email = document.getElementById('signup-email').value;
+  const phone = document.getElementById('signup-phone').value;
+  const address = document.getElementById('signup-address').value;
+  const password = document.getElementById('signup-password').value;
+  const confirm_password = document.getElementById('signup-confirm-password').value;
+
+  fetch('http://localhost:3000/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ full_name, email, phone, address, password, confirm_password })
+  })
+  .then(res => res.text())
+  .then(msg => alert(msg))
+  .catch(err => alert("Error: " + err));
+  return false;
+}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+        <a href="about.html">About</a>
+    </nav>
+</header>
+<p id="welcome-user"></p>
+
+<script>
+    const name = localStorage.getItem('username');
+    if (name) {
+        document.getElementById('welcome-user').innerText = `Welcome, ${name}!`;
+    }
+</script>
+
+
+<section id="restaurants">
+    <h2>Popular Restaurants</h2>
+    <div class="restaurant-list" id="restaurant-container">
+        <!-- Restaurants will be added here dynamically -->
+    </div>
+</section>
+
+
+<footer>© 2025 Food Delivery</footer>
+
+<script>
+    const restaurants = [
+        {
+            name: "Vikash Dabha ", cuisine: "Indian",restaurantImage: "images/vikash_dhaba.png", dishes: [
+                ["Masroom Mashala", 349, "curry","images/mashroom.png"],
+                ["Paneer Tikka", 199, "paneer","images/panner_tikka.png"],
+                ["Butter Naan", 49, "naan","images/btter_naan.png"],
+                ["Veg Biryani", 249, "biryani","images/veg_biryani.png"],
+                ["Veg Thali", 199, "thali","images/thali.jpeg"],
+                ["Penne Alfredo", 249, "pasta","images/penne alfredo.png"],
+            ]
+        },
+        {
+            name: "Chandigarh Dabha", cuisine: "Indian", restaurantImage: "images/chandigarh_dhaba.jpg" ,dishes: [
+                ["Masroom mashala", 299, "Masroom mashala","images/mashroom.png"],
+                ["Paneer Tikka", 199, "paneer","images/paneer tikka.jpeg"],
+                ["Butter Naan", 49, "naan","images/btter_naan.png"],
+                ["Veg Biryani", 249, "biryani","images/veg_biryani.png"],
+                ["Veg Thali", 199, "thali","images/thali.jpeg"],
+                ["Penne Alfredo", 249, "pasta","images/penne alfredo.png"],
+            ]
+        },
+        {
+            name: "Pizza Hut", cuisine: "Indian",restaurantImage:"images/pizza_hut.png" , dishes: [
+                ["Peri Peri Pizza", 399, "Pizza","images/peri peri pizza.jpg"],
+                ["Margherita Pizza", 299, "Pizza","images/margherita pizza2.jpeg"],
+                ["Paneer Tikka Pizza", 349, "Pizza","images/paneer tikka pizza.png"],
+                ["Veggie Supreme Pizza", 349, "Pizza","images/veggie supreme.webp"],
+                ["Farmhouse Pizza", 349, "Pizza","images/formhouse pizza.png"],
+                ["Veggie Supreme Pizza", 349, "Pizza","images/veggie supreme.webp"],
+                ["Farmhouse Pizza", 349, "Pizza","images/formhouse pizza.png"],
+                ["Classic Cheese Pizza", 399, "Pizza","images/classic cheese pizza.jpeg"],
+            ]
+        },
+        {
+            name: "Burgur King", cuisine: "Indian",restaurantImage:"images/burger_king.png", dishes: [
+                ["Veg Burgur", 399, "Burgur","images/veg burger.jpeg"],
+                ["Chicken Burgur", 449, "Burgur","images/chicken burger.jpeg"],
+                ["Paneer Tikka Burgur", 349, "Burgur","images/panner tikka burger.jpeg"],
+                ["Veggie Supreme Burgur", 349, "Burgur","images/viggie supreme burger.jpeg"],
+                ["Farmhouse Burgur", 349, "Burgur","images/formhouse burger.png"],
+                ["Veggie Supreme Burgur", 349, "Burgur","images/viggie supreme burger.jpeg"],
+                ["Farmhouse Burgur", 349, "Burgur","images/formhouse burger.png"],
+                ["BBQ Bacon Burger", 249, "burger","images/burger.jpg"],
+            ]
+        },
+        {
+            name: "Chicken King", cuisine: "Indian",restaurantImage:"images/chicken_king.jpeg", dishes: [
+                ["Chicken Tikka", 249, "Chicken","images/chicken tikka.avif"],
+                ["Chicken Biryani", 299, "Chicken","images/chicken biryani.jpeg"],
+                ["Chicken Handi", 259, "chicken","images/chicken handi.jpeg"],
+                ["Chicken Korma", 349, "chicken","images/chicken korma.jpeg"],
+            ]
+        },
+        {
+            name: "Spicy Bites", cuisine: "Indian",restaurantImage:"images/spicy_bites.jpeg", dishes: [
+                ["Butter Chicken", 349, "curry","images/butter chicken.jpeg"],
+                ["Paneer Tikka", 199, "paneer","images/paneer tikka.jpeg"],
+            ]
+        },
+        {
+            name: "Pasta Palace", cuisine: "Italian",restaurantImage:"images/pasta place.jpeg", dishes: [
+                ["Margherita Pizza", 299, "pizza","images/margherita.jpeg"],
+                ["Penne Alfredo", 249, "pasta","images/penne alfredo.png"],
+            ]
+        },
+        {
+    name: "The Spice Route",cuisine: "Indian",restaurantImage:"images/spicyRoutes.jpg",dishes: [
+        ["Paneer Butter Masala", 249, "curry","images/paneer butter masala.jpeg"],
+        ["Butter Naan", 49, "bread","images/btter_naan.png"],
+        ["Chicken Biryani", 299, "biryani","images/chicken biryani.jpeg"],
+        ["Dal Makhani", 199, "dal","images/dal makhani.jpeg"],
+        ["Aloo Paratha", 79, "bread","images/aloo parathe.jpeg"],
+        ["Veg Pulao", 189, "rice","images/veg purao.jpeg"],
+        ["Chole Bhature", 149, "chole","images/chole-bhature.jpg"],
+        ["Tandoori Chicken", 299, "tandoori","images/tanduri chicken.jpeg"],
+        ["Kadhai Paneer", 229, "curry","images/kadhai paneer.jpeg"],
+        ["Rasgulla", 59, "dessert","images/rasgulla.jpeg"]
+    ]
+},
+{
+    name: "Tandoori Nights",cuisine: "Indian",restaurantImage:"images/tanduri thali.avif",dishes: [
+        ["Tandoori Chicken", 349, "tandoori","images/tanduri chicken.jpeg"],
+        ["Paneer Tikka", 199, "tandoori","images/paneer tikka.jpeg"],
+        ["Hara Bhara Kebab", 149, "appetizer","images/Hara Bhara Kebab.jpeg"],
+        ["Mutton Seekh Kebab", 299, "tandoori","images/Mutton Seekh Kebab.jpeg"],
+        ["Dal Tadka", 179, "dal","images/Dal Tadka.jpeg"],
+        ["Veg Kofta", 229, "curry","images/Veg Kofta.jpeg"],
+        ["Butter Naan", 59, "bread","images/btter_naan.png"],
+        ["Chicken Shawarma", 259, "wrap","images/Chicken Shawarma.jpeg"],
+        ["Pav Bhaji", 129, "street food","images/Pav Bhaj.jpeg"],
+        ["Kulfi", 99, "dessert","images/Kulfi.jpeg"]            
+    ]
+},
+{
+    name: "Curry Kingdom",cuisine: "Indian",restaurantImage:"images/Curry Kingdom.avif",dishes: [
+        ["Chicken Curry", 259, "curry","images/Chicken Curry.avif"],
+        ["Mutton Rogan Josh", 329, "curry","images/Mutton Rogan Josh.jpeg"],
+        ["Shahi Paneer", 239, "curry","images/Shahi Paneer.avif"],
+        ["Palak Paneer", 219, "curry","images/Palak Paneer.avif"],
+        ["Jeera Rice", 129, "rice","images/Jeera Rice.jpeg"],
+        ["Garlic Naan", 69, "bread","images/Garlic Naan.jpeg"],
+        ["Tandoori Roti", 29, "bread","images/Tandoori Roti.jpeg"],
+        ["Chicken Tikka Masala", 279, "curry","images/Chicken Tikka Masala.avif"],
+        ["Gulab Jamun", 59, "dessert","images/Gulab Jamun.jpeg"],
+        ["Boondi Raita", 89, "side","images/Boondi Raita.jpeg"]
+    ]
+},
+{
+    name: "Royal Thali",cuisine: "Indian",restaurantImage:"images/royal thali.avif",dishes: [
+        ["Butter Chicken", 349, "curry","images/Butter Chicken.avif"],
+        ["Paneer Tikka", 199, "tandoori","images/paneer tikka.jpeg"],
+        ["Dal Makhani", 189, "dal","images/dal makhani.jpeg"],
+        ["Jeera Rice", 129, "rice","images/Jeera Rice.jpeg"],
+        ["Tandoori Roti", 29, "bread","images/Tandoori Roti.jpeg"],
+        ["Mix Veg Curry", 179, "curry","images/Mix Veg Curry.jpeg"],
+        ["Aloo Gobi", 159, "dry","images/Aloo Gobi.avif"],
+        ["Boondi Raita", 89, "side","images/Boondi Raita.jpeg"],
+        ["Gulab Jamun", 59, "dessert","images/Gulab Jamun.jpeg"],
+        ["Masala Papad", 39, "starter","images/Masala Papad.jpeg"]
+    ]
+},
+{
+    name: "Maharaja Da Dhaba",cuisine: "Indian",restaurantImage:"images/Maharaja Da Dhaba.avif" ,dishes: [
+        ["Amritsari Kulcha", 149, "bread","images/Amritsari Kulcha.avif"],
+        ["Rajma Chawal", 169, "rice","images/Rajma Chawal.png"],
+        ["Chole Bhature", 139, "chole","images/chole-bhature.jpg"],
+        ["Paneer Butter Masala", 249, "curry","images/paneer butter masala.jpeg"],
+        ["Chicken Handi", 279, "curry","images/chicken handi.jpeg"],
+        ["Stuffed Naan", 99, "bread","images/Stuffed Naan.jpg"],
+        ["Lassi", 79, "drink","images/Lassi.avif"],
+        ["Gajar Halwa", 89, "dessert","images/Gajar Halwa.jpg"],
+        ["Baingan Bharta", 189, "curry","images/Baingan Bharta.jpg"],
+        ["Kadai Paneer", 229, "curry","images/Kadai Paneer.jpeg"]
+    ]
+},
+{
+    name: "Flavors of India",cuisine: "Indian",restaurantImage: "images/Flavors of India.avif",dishes: [
+        ["Paneer Lababdar", 239, "curry","images/Paneer Lababdar.jpg"],
+        ["Chicken Curry", 269, "curry","images/Chicken Curry.avif"],
+        ["Veg Pulao", 149, "rice","images/veg purao.jpeg"],
+        ["Garlic Naan", 49, "bread","images/Garlic Naan.jpeg"],
+        ["Kadhi Pakora", 159, "curry","images/Kadhi Pakora.jpeg"],
+        ["Bhindi Masala", 139, "dry","images/Bhindi Masala.jpeg"],
+        ["Tandoori Chicken", 299, "tandoori","images/tanduri chicken.jpeg"],
+        ["Samosa", 29, "starter","images/Samosa.avif"],
+        ["Rasgulla", 49, "dessert","images/rasgulla.jpeg"],
+        ["Sweet Lassi", 59, "drink","images/Lassi.avif"]
+    ]
+},
+{
+    name: "Desi Zaika",cuisine: "Indian",restaurantImage:"images/Desi Zaika.avif",dishes: [
+        ["Palak Paneer", 199, "curry","images/Palak Paneer.avif"],
+        ["Butter Naan", 39, "bread","images/btter_naan.png"],
+        ["Aloo Paratha", 69, "bread","images/Aloo parathe.jpeg"],
+        ["Chicken Tikka", 299, "tandoori","images/chicken tikka.avif"],
+        ["Dal Tadka", 149, "dal","images/Dal Tadka.jpeg"],
+        ["Veg Manchurian", 189, "starter","images/Veg Manchurian.jpg"],
+        ["Chole Masala", 169, "curry","images/Chole Masala.jpeg"],
+        ["Matar Paneer", 199, "curry","images/matar panner.jpeg"],
+        ["Kheer", 59, "dessert","images/Kheer.jpg"],
+        ["Jalebi", 39, "dessert","images/Jalebi.jpeg"]
+    ]
+},
+{
+    name: "Roti Rasoi",cuisine: "Indian",restaurantImage:"images/Roti Rasoii.avif",dishes: [
+        ["Methi Thepla", 89, "bread","images/Methi Thepla.jpeg"],
+        ["Masala Dosa", 129, "southindian","images/Masala Dosa.avif"],
+        ["Idli Sambar", 99, "southindian","images/Idli Sambar.avif"],
+        ["Dhokla", 89, "snack","images/Dhokla.jpg"],
+        ["Bisi Bele Bath", 139, "southindian","images/Bisi Bele Bath.jpg"],
+        ["Rava Kesari", 79, "dessert","images/Rava Kesari.jpg"],
+        ["Poori Bhaji", 119, "northindian","images/Poori Bhaji.jpg"],
+        ["Onion Pakoda", 59, "starter","images/Onion Pakoda.jpeg"],
+        ["Moong Dal Halwa", 89, "dessert","images/Moong Dal Halwa.jpeg"],
+        ["Filter Coffee", 49, "drink","images/Filter Coffee.avif"]
+    ]
+},
+{
+    name: "Zaika Junction",cuisine: "Indian",restaurantImage:"images/Zaika Junction.avif",dishes: [
+        ["Butter Chicken", 349, "curry","images/Butter Chicken.avif"],
+        ["Paneer Tikka", 199, "starter","images/paneer tikka.jpeg"],
+        ["Dal Makhani", 179, "dal","images/dal makhani.jpeg"],
+        ["Roti", 25, "bread","images/Roti.avif"],
+        ["Chicken Biryani", 299, "biryani","images/chicken biryani.jpeg"],
+        ["Raita", 49, "side","images/raita.jpg"],
+        ["Gulab Jamun", 59, "dessert","images/Gulab Jamun.jpeg"],
+        ["Tandoori Roti", 35, "bread","images/Tandoori Roti.jpeg"],
+        ["Jeera Rice", 119, "rice","images/Jeera Rice.jpeg"],
+        ["Masala Papad", 39, "starter","images/Masala Papad.jpeg"]
+    ]
+},
+{
+    name: "Khaati Peeti Rasoi",cuisine: "Indian",restaurantImage:"images/Khaati Peeti Rasoi.avif",dishes: [
+        ["Chole Bhature", 149, "northindian","images/chole-bhature.jpg"],
+        ["Rajma Chawal", 139, "northindian","images/Rajma Chawal.png"],
+        ["Aloo Gobi", 129, "curry","images/Aloo Gobi.avif"],
+        ["Pav Bhaji", 99, "snack","images/Pav Bhaj.jpeg"],
+        ["Kachori", 49, "snack","images/Kachori.jpeg"],
+        ["Jalebi Fafda", 79, "snack","images/Jalebi Fafda.jpeg"],
+        ["Boondi Raita", 39, "side","images/Boondi Raita.jpeg"],
+        ["Plain Rice", 99, "rice","images/Plain Rice.jpeg"],
+        ["Sev Tamatar", 119, "curry","images/Sev Tamatar.jpeg"],
+        ["Malpua", 59, "dessert","images/Malpua.jpg"]
+    ]
+},
+{
+    name: "Masala Mantra",cuisine: "Indian",restaurantImage:"images/Masala Mantra.avif",dishes: [
+        ["Veg Kolhapuri", 179, "spicy","images/Veg Kolhapuri.webp"],
+        ["Misal Pav", 89, "snack","images/Misal Pav.webp"],
+        ["Batata Vada", 49, "starter","images/Batata Vada.jpg"],
+        ["Kanda Poha", 69, "breakfast","images/Kanda Poha.jpeg"],
+        ["Puran Poli", 99, "sweet","images/Puran Poli.jpeg"],
+        ["Thalipeeth", 89, "breakfast","images/Thalipeeth.jpg"],
+        ["Sabudana Khichdi", 99, "fasting","images/Sabudana Khichdi.jpg"],
+        ["Modak", 89, "dessert","images/Modak.avif"],
+        ["Sol Kadhi", 49, "drink","images/Sol Kadhi.jpeg"],
+        ["Shengdana Chutney", 39, "side","images/Shengdana Chutney.webp"]
+    ]
+},
+{
+    name: "Biryani Express",cuisine: "Indian",restaurantImage:"images/Biryani Express.avif",dishes: [
+        ["Hyderabadi Biryani", 299, "biryani","images/Hyderabadi Biryanii.avif"],
+        ["Lucknowi Biryani", 319, "biryani","images/Lucknowi Biryani.jpeg"],
+        ["Egg Biryani", 229, "biryani","images/Egg Biryani.jpg"],
+        ["Mutton Biryani", 399, "biryani","images/Mutton Biryani.webp"],
+        ["Veg Biryani", 199, "biryani","images/veg_biryani.png"],
+        ["Raita", 49, "side","images/raita.jpg"],
+        ["Mirchi Ka Salan", 59, "side","images/Mirchi Ka Salan.jpeg"],
+        ["Double Ka Meetha", 69, "dessert","images/Double Ka Meetha.jpg"],
+        ["Chicken 65", 159, "starter","images/Chicken 65.jpg"],
+        ["Paneer 65", 149, "starter","images/Paneer 65.jpg"]
+    ]
+},
+{
+    name: "Desi Handi",cuisine: "Indian",restaurantImage:"images/Desi Handi.avif",dishes: [
+        ["Handi Chicken", 349, "curry","images/handi chicken.jpg"],
+        ["Kadai Paneer", 229, "curry","images/kadhai paneer.jpeg"],
+        ["Chapati", 15, "bread","images/Chapati.jpg"],
+        ["Tandoori Chicken", 299, "starter","images/tanduri chicken.jpeg"],
+        ["Baingan Bharta", 159, "curry","images/Baingan Bharta.jpg"],
+        ["Moong Dal", 129, "dal","images/Moong Dal.jpeg"],
+        ["Gajar Halwa", 79, "dessert","images/Gajar Halwa.jpg"],
+        ["Butter Naan", 45, "bread","images/btter_naan.png"],
+        ["Dahi Bhalla", 69, "snack","images/Dahi Bhalla.jpg"],
+        ["Thandai", 59, "drink","images/Thandai.jpeg"]
+    ]
+}
+
+    ];
+
+    function addToCart(itemName, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Check if the item already exists in the cart
+        let item = cart.find(item => item.name === itemName);
+
+        if (item) {
+            // If item exists, increase the quantity
+            item.quantity += 1;
+        } else {
+            // Otherwise, add a new item to the cart
+            cart.push({ name: itemName, price: price, quantity: 1 });
+        }
+
+        // Save the updated cart back to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Update the cart count in header
+        updateCartCount();
+    }
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+        document.getElementById('cart-count').innerText = cartCount;
+    }
+
+    function toggleMenu(menuId) {
+        const menu = document.getElementById(menuId);
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // On page load, update the cart count
+    window.onload = function() {
+        updateCartCount();
+    };
+
+    // Generate restaurant cards and menus dynamically
+    const restaurantContainer = document.getElementById("restaurant-container");
+
+    restaurants.forEach((restaurant, index) => {
+        const restaurantCard = document.createElement('div');
+        restaurantCard.className = 'restaurant-card';
+
+        restaurantCard.innerHTML = `
+    <div class="restaurant-info" onclick="toggleMenu('menu${index}')">
+        <img src="${restaurant.restaurantImage || 'https://source.unsplash.com/300x150/?restaurant'}" alt="${restaurant.name}">
+        <h3>${restaurant.name}</h3>
+        <p>${restaurant.cuisine}</p>
+        <button>View Menu</button>
+    </div>
+    <div class="restaurant-menu" id="menu${index}" style="display: none;">
+        ${restaurant.dishes.map(dish => `
+            <div class="menu-item">
+                <img src="${dish[3] ? dish[3] : `https://source.unsplash.com/50x50/?${encodeURIComponent(dish[0])}`}" alt="${dish[0]}">
+                <p>${dish[0]} - ₹${dish[1]}</p>
+                <button onclick="addToCart('${dish[0]}', ${dish[1]})">Add to Cart</button>
+            </div>
+        `).join('')}
+    </div>
+`;
+
+
+        restaurantContainer.appendChild(restaurantCard);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Food Delivery App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body onload="checkAuth()">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#" onclick="showSection('dashboard')">📊 Dashboard</a></li>
+            <li><a href="#" onclick="showSection('orders')">🛒 Manage Orders</a></li>
+            <li><a href="#" onclick="showSection('menu')">🍕 Manage Menu</a></li>
+            <li><a href="#" onclick="showSection('users')">👥 Manage Users</a></li>
+            <li><a href="#" onclick="showSection('deliveries')">🚚 Track Deliveries</a></li>
+            <li><a href="#" onclick="logout()">🔓 Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <h2>📊 Dashboard</h2>
+            <p>Welcome to the Admin Panel. View statistics and manage your application easily.</p>
+            <div class="stats">
+                <div class="card">
+                    <h3>Total Orders</h3>
+                    <p>120</p>
+                </div>
+                <div class="card">
+                    <h3>Active Users</h3>
+                    <p>50</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Deliveries</h3>
+                    <p>8</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Orders Section -->
+        <section id="orders" class="section">
+            <h2>🛒 Manage Orders</h2>
+            <p>View and update order statuses.</p>
+            <table>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>#12345</td>
+                    <td>Aman kumar</td>
+                    <td>Pending</td>
+                    <td><button onclick="updateOrder()">Update</button></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Manage Menu Section -->
+        <section id="menu" class="section">
+            <h2>🍕 Manage Menu</h2>
+            <p>Add, update, or delete menu items.</p>
+            <button onclick="addMenuItem()">➕ Add New Item</button>
+            <table>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Pizza</td>
+                    <td>$12</td>
+                    <td>
+                        <button onclick="editItem()">✏️ Edit</button>
+                        <button onclick="deleteItem()">❌ Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Manage Users Section -->
+        <section id="users" class="section">
+            <h2>👥 Manage Users</h2>
+            <p>View and manage registered users.</p>
+            <table>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>#001</td>
+                    <td>Aman kumar</td>
+                    <td>aman@gmail.com</td>
+                    <td><button onclick="deleteUser()">❌ Delete</button></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Track Deliveries Section -->
+        <section id="deliveries" class="section">
+            <h2>🚚 Track Deliveries</h2>
+            <p>Monitor real-time delivery status.</p>
+            <ul>
+                <li>Order #12345 - Out for delivery</li>
+                <li>Order #12346 - Delivered</li>
+            </ul>
+        </section>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

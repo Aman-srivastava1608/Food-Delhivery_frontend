@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Food Delivery App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <label for="username">👤 Username:(admin)</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">🔒 Password:(12345)</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="button" onclick="login()">Login</button>
+            <p><a href="../login.html">User login</a></p>
+        </form>
+        <p id="error-msg"></p>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

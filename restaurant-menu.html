@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Restaurant Menu - Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<section id="restaurant-menu">
+    <h2 id="restaurant-name">Menu</h2>
+    <div class="menu-items" id="menu-items"></div>
+</section>
+
+<footer>© 2025 Food Delivery</footer>
+
+<script src="script.js"></script>
+<script>
+    const restaurantMenus = {
+        restaurant1: {
+            name: 'Spicy Bites',
+            items: [
+                { id: 101, name: 'Paneer Tikka', price: 199, img: 'https://source.unsplash.com/100x100/?paneer' },
+                { id: 102, name: 'Butter Chicken', price: 349, img: 'https://source.unsplash.com/100x100/?chicken' }
+            ]
+        },
+        restaurant2: {
+            name: 'Pasta Palace',
+            items: [
+                { id: 201, name: 'Alfredo Pasta', price: 249, img: 'https://source.unsplash.com/100x100/?pasta' },
+                { id: 202, name: 'Margherita Pizza', price: 299, img: 'https://source.unsplash.com/100x100/?pizza' }
+            ]
+        },
+        restaurant3: {
+            name: 'Burger Hub',
+            items: [
+                { id: 301, name: 'Classic Burger', price: 199, img: 'https://source.unsplash.com/100x100/?burger' },
+                { id: 302, name: 'Cheese Fries', price: 149, img: 'https://source.unsplash.com/100x100/?fries' }
+            ]
+        }
+    };
+
+    const selectedRestaurant = localStorage.getItem('selectedRestaurant');
+    const menuSection = document.getElementById('menu-items');
+    const restaurantName = document.getElementById('restaurant-name');
+
+    if (selectedRestaurant && restaurantMenus[selectedRestaurant]) {
+        const restaurant = restaurantMenus[selectedRestaurant];
+        restaurantName.innerText = restaurant.name;
+
+        restaurant.items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'menu-item';
+            div.innerHTML = `
+                <img src="${item.img}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>₹${item.price}</p>
+                <button onclick="addToCart(${item.id}, '${selectedRestaurant}')">Add to Cart</button>
+            `;
+            menuSection.appendChild(div);
+        });
+    } else {
+        menuSection.innerHTML = '<p>Menu not found.</p>';
+    }
+
+    function addToCart(itemId, restaurantId) {
+        const item = restaurantMenus[restaurantId].items.find(i => i.id === itemId);
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(item);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${item.name} added to cart!`);
+        updateCartCount();
+    }
+
+    window.onload = updateCartCount;
+</script>
+
+</body>
+</html>

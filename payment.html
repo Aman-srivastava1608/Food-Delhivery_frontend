@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payment - Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function loadAddress() {
+            const deliveryInfo = JSON.parse(localStorage.getItem('deliveryInfo'));
+            if (!deliveryInfo) {
+                alert('Please fill delivery address first');
+                window.location.href = 'address.html';
+                return;
+            }
+            document.getElementById('delivery-summary').innerText = `
+                Name: ${deliveryInfo.name}
+                Address: ${deliveryInfo.address}
+                Phone: ${deliveryInfo.phone}
+            `;
+        }
+
+        function placeOrder() {
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            alert(`Order placed successfully!\nPayment Method: ${paymentMethod}`);
+            localStorage.removeItem('cart');          // Clear cart after placing order
+            localStorage.removeItem('deliveryInfo');  // Clear address after placing order
+            window.location.href = 'index.html';      // Go back to home page
+        }
+
+        window.onload = loadAddress;
+    </script>
+</head>
+<body>
+
+<header>
+    <div class="logo">🍕 Food Delivery</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+</header>
+
+<section>
+    <h2>Payment</h2>
+    <h3>Delivery Details</h3>
+    <pre id="delivery-summary"></pre>
+
+    <h3>Select Payment Method</h3>
+    <label><input type="radio" name="payment" value="Cash on Delivery" checked> Cash on Delivery</label><br>
+    <label><input type="radio" name="payment" value="Credit/Debit Card"> Credit/Debit Card</label><br>
+    <label><input type="radio" name="payment" value="UPI"> UPI</label><br>
+
+    <button onclick="placeOrder()">Place Order</button>
+</section>
+
+<footer>© 2025 Food Delivery</footer>
+
+</body>
+</html>
