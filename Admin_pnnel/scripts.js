@@ -1,6 +1,6 @@
 // Dummy Admin Credentials
 const adminUsername = "admin";
-const adminPassword = "12345";
+const adminPassword = "Aman@1234";
 
 // Login Function
 function login() {
